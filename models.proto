@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package models;
+
+message ProductValueRange {
+    int64 min = 1;
+    int64 max = 2;
+}
+
+message Product {
+    string id = 1;
+    string name = 2;
+    string country = 3;
+    string currency = 4;
+    repeated int64 denominations = 5;
+    repeated ProductValueRange value_range = 6;
+    string image = 7;
+    string description = 8;
+    string terms_and_conditions = 9;
+    string instructions = 10;
+}
+
+message InviteCode {
+    string code = 1;
+    bool is_used = 2;
+}

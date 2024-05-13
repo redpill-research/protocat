@@ -1,0 +1,175 @@
+syntax = "proto3";
+
+import "models.proto";
+
+package api;
+
+// desc: Auth service
+service WalletAuthService {
+    /**
+        path: /api/v1/auth/login/start
+        description: Start logic process
+        method: POST
+        version: v1
+        auth: false
+    */
+    rpc LoginStart(LoginStartRequest) returns (LoginStartReponse) {}
+
+    /**
+        path: /api/v1/auth/login/finish
+        description: Finish login process
+        method: POST
+        version: v1
+        auth: false
+    */
+    rpc LoginFinish(LoginFinishRequest) returns (LoginFinishResponse) {}
+
+    /**
+        path: /api/v1/auth/logout
+        description: Logout
+        method: POST
+        version: v1
+        auth: true
+    */
+    rpc Logout(LogoutRequest) returns (LogoutResponse) {}
+}
+
+message LoginStartRequest {
+    string address = 1;
+}
+
+message LoginStartReponse {
+    string message_for_sign = 1;
+}
+
+message LoginFinishRequest {
+    string address = 1;
+    string signature = 2;
+}
+
+message LoginFinishResponse {
+    string token = 1;
+    string key = 2;
+    string nonce = 3;
+}
+
+message LogoutRequest {}
+message LogoutResponse {
+    bool success = 1;
+}
+
+// desc: Country service
+service CountryService {
+    /**
+        path: /api/v1/countries
+        description: Get countries list
+        method: POST
+        version: v1
+        auth: false
+    */
+    rpc GetCountries(CountriesRequest) returns (CountriesResponse) {}
+}
+
+message CountriesRequest {}
+
+message CountriesResponse {
+    repeated string countries = 1;
+}
+
+// desc: Products service
+service ProductsService {
+    /**
+        @path: /api/v1/products
+        @description: Get products list by country
+        @method: POST
+        @version: v1
+        @auth: false
+    */
+    rpc GetProductsByCountry(ProductsByCountryRequest) returns (ProductsByCountryResponse) {}
+
+    /**
+        path: /api/v1/purchase
+        description: Purchase product
+        method: POST
+        version: v1
+        auth: true
+    */
+    rpc PurchaseProduct(PurchaseProductRequest) returns (PurchaseResponse) {}
+}
+
+message ProductsByCountryRequest {
+    /**
+        @description: country of products
+        @required: true
+    */
+    string country = 1;
+}
+
+message ProductsByCountryResponse {
+    repeated models.Product products = 1;
+}
+
+message PurchaseProductRequest {
+    string productId = 1;
+    string country = 2;
+    int64 productDenomination = 3;
+}
+
+message PurchaseResponse {
+    string wallet = 1;
+    string amount = 2;
+    string memo = 3;
+    string purchaseId = 4;
+}
+
+// desc: Referral system service
+service ReferralService {
+    /**
+        path: /api/v1/referral/info
+        description: Get referral info
+        method: POST
+        version: v1
+        auth: true
+    */
+    rpc GetReferralInfo(ReferralInfoRequest) returns (ReferralInfoResponse) {}
+
+    /**
+        path: /api/v1/referral/send_invite
+        description: send invite
+        method: POST
+        version: v1
+        auth: true
+    */
+    rpc SendInvite(InviteRequest) returns (InviteResponse) {}
+
+    /**
+        path: /api/v1/referral/generate_code
+        description: Generate invite code
+        method: POST
+        version: v1
+        auth: true
+    */
+    rpc GenerateInviteCode(GenerateCodeRequest) returns (GenerateCodeResponse) {}
+}
+
+message ReferralInfoRequest {}
+
+message ReferralInfoResponse {
+    int32 avalible_count = 1;
+    repeated models.InviteCode generated_codes = 2;
+    repeated string invited_addresses = 3;
+}
+
+message InviteRequest {
+    string address = 1;
+}
+
+message InviteResponse {
+    string tx = 1;
+}
+
+message GenerateCodeRequest {}
+
+message GenerateCodeResponse {
+    string code = 1;
+}
