@@ -1,0 +1,20 @@
+name: Protobuf Build
+
+on:
+    push:
+    pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up protoc
+        uses: arduino/setup-protoc@v1
+
+      - name: Build Protobuf
+        run: |
+          protoc --version
+          protoc --proto_path=. --cpp_out=. **/*.proto
