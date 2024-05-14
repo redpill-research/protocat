@@ -1,18 +1,20 @@
 syntax = "proto3";
 
-package socket;
+package socket.v1;
 
 message SocketEvent {
-    SocketEventType eventType = 1;
+    SocketEventType event_type = 1;
     // any message_data = 2;
 }
 
 enum SocketEventType {
+    SOCKET_EVENT_TYPE_UNSPECIFIED = 0;
+
     // service mesaages
-    CONNECT = 0;
-    DISCONNECT = 1;
-    PING = 2;
+    SOCKET_EVENT_TYPE_CONNECT = 1;
+    SOCKET_EVENT_TYPE_DISCONNECT = 2;
+    SOCKET_EVENT_TYPE_PING = 3;
 
     // purchase messages
-    PURCHASE_RESULT = 3;
+    SOCKET_EVENT_TYPE_PURCHASE_RESULT = 4;
 }

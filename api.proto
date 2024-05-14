@@ -2,7 +2,7 @@ syntax = "proto3";
 
 import "models.proto";
 
-package api;
+package api.v1;
 
 // desc: Auth service
 service WalletAuthService {
@@ -13,7 +13,7 @@ service WalletAuthService {
         version: v1
         auth: false
     */
-    rpc LoginStart(LoginStartRequest) returns (LoginStartReponse) {}
+    rpc LoginStart(LoginStartRequest) returns (LoginStartResponse) {}
 
     /**
         path: /api/v1/auth/login/finish
@@ -38,7 +38,7 @@ message LoginStartRequest {
     string address = 1;
 }
 
-message LoginStartReponse {
+message LoginStartResponse {
     string message_for_sign = 1;
 }
 
@@ -67,12 +67,12 @@ service CountryService {
         version: v1
         auth: false
     */
-    rpc GetCountries(CountriesRequest) returns (CountriesResponse) {}
+    rpc GetCountries(GetCountriesRequest) returns (GetCountriesResponse) {}
 }
 
-message CountriesRequest {}
+message GetCountriesRequest {}
 
-message CountriesResponse {
+message GetCountriesResponse {
     repeated string countries = 1;
 }
 
@@ -85,7 +85,7 @@ service ProductsService {
         @version: v1
         @auth: false
     */
-    rpc GetProductsByCountry(ProductsByCountryRequest) returns (ProductsByCountryResponse) {}
+    rpc GetProductsByCountry(GetProductsByCountryRequest) returns (GetProductsByCountryResponse) {}
 
     /**
         path: /api/v1/purchase
@@ -94,10 +94,10 @@ service ProductsService {
         version: v1
         auth: true
     */
-    rpc PurchaseProduct(PurchaseProductRequest) returns (PurchaseResponse) {}
+    rpc PurchaseProduct(PurchaseProductRequest) returns (PurchaseProductResponse) {}
 }
 
-message ProductsByCountryRequest {
+message GetProductsByCountryRequest {
     /**
         @description: country of products
         @required: true
@@ -105,21 +105,21 @@ message ProductsByCountryRequest {
     string country = 1;
 }
 
-message ProductsByCountryResponse {
-    repeated models.Product products = 1;
+message GetProductsByCountryResponse {
+    repeated models.v1.Product products = 1;
 }
 
 message PurchaseProductRequest {
-    string productId = 1;
+    string product_id = 1;
     string country = 2;
-    int64 productDenomination = 3;
+    int64 product_denomination = 3;
 }
 
-message PurchaseResponse {
+message PurchaseProductResponse {
     string wallet = 1;
     string amount = 2;
     string memo = 3;
-    string purchaseId = 4;
+    string purchase_id = 4;
 }
 
 // desc: Referral system service
@@ -131,7 +131,7 @@ service ReferralService {
         version: v1
         auth: true
     */
-    rpc GetReferralInfo(ReferralInfoRequest) returns (ReferralInfoResponse) {}
+    rpc GetReferralInfo(GetReferralInfoRequest) returns (GetReferralInfoResponse) {}
 
     /**
         path: /api/v1/referral/send_invite
@@ -140,7 +140,7 @@ service ReferralService {
         version: v1
         auth: true
     */
-    rpc SendInvite(InviteRequest) returns (InviteResponse) {}
+    rpc SendInvite(SendInviteRequest) returns (SendInviteResponse) {}
 
     /**
         path: /api/v1/referral/generate_code
@@ -149,27 +149,27 @@ service ReferralService {
         version: v1
         auth: true
     */
-    rpc GenerateInviteCode(GenerateCodeRequest) returns (GenerateCodeResponse) {}
+    rpc GenerateInviteCode(GenerateInviteCodeRequest) returns (GenerateInviteCodeResponse) {}
 }
 
-message ReferralInfoRequest {}
+message GetReferralInfoRequest {}
 
-message ReferralInfoResponse {
+message GetReferralInfoResponse {
     int32 avalible_count = 1;
-    repeated models.InviteCode generated_codes = 2;
+    repeated models.v1.InviteCode generated_codes = 2;
     repeated string invited_addresses = 3;
 }
 
-message InviteRequest {
+message SendInviteRequest {
     string address = 1;
 }
 
-message InviteResponse {
+message SendInviteResponse {
     string tx = 1;
 }
 
-message GenerateCodeRequest {}
+message GenerateInviteCodeRequest {}
 
-message GenerateCodeResponse {
+message GenerateInviteCodeResponse {
     string code = 1;
 }
