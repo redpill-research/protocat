@@ -2,7 +2,7 @@ syntax = "proto3";
 
 import "models.proto";
 
-package api.v1;
+package api;
 
 // desc: Auth service
 service WalletAuthService {
@@ -106,7 +106,7 @@ message GetProductsByCountryRequest {
 }
 
 message GetProductsByCountryResponse {
-    repeated models.v1.Product products = 1;
+    repeated models.Product products = 1;
 }
 
 message PurchaseProductRequest {
@@ -156,7 +156,7 @@ message GetReferralInfoRequest {}
 
 message GetReferralInfoResponse {
     int32 avalible_count = 1;
-    repeated models.v1.InviteCode generated_codes = 2;
+    repeated models.InviteCode generated_codes = 2;
     repeated string invited_addresses = 3;
 }
 
