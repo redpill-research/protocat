@@ -112,7 +112,7 @@ message GetProductsByCountryResponse {
 message PurchaseProductRequest {
     string product_id = 1;
     string country_id = 2;
-    int64 product_denomination = 3;
+    double product_denomination = 3;
 }
 
 message PurchaseProductResponse {
