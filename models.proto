@@ -19,7 +19,7 @@ message Product {
     string country = 3;
     string currency = 4;
     repeated double denominations = 5;
-    repeated ProductValueRange value_range = 6;
+    ProductValueRange value_range = 6;
     string image = 7;
     string description = 8;
     string terms_and_conditions = 9;
