@@ -13,7 +13,7 @@ service WalletAuthService {
         version: v1
         auth: false
     */
-    rpc AuthStart(LoginStartRequest) returns (LoginStartResponse) {}
+    rpc AuthStart(AuthStartRequest) returns (AuthStartResponse) {}
 
     /**
         path: /api/v1/auth/confirm
@@ -22,7 +22,7 @@ service WalletAuthService {
         version: v1
         auth: false
     */
-    rpc AuthConfirm(LoginFinishRequest) returns (LoginFinishResponse) {}
+    rpc AuthConfirm(AuthConfirmRequest) returns (AuthConfirmResponse) {}
 }
 
 message AuthStartRequest {

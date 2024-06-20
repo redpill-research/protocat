@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package errors;
+
+enum ErrorTypes {
+    UNKNOWN = 0;
+    INVALID_ARGUMENT = 1;
+    INVALID_PAYLOAD = 2;
+    UNAUTHENTICATED = 3;
+    UNIMPLEMENTED = 4;
+    INTERNAL = 5;
+}
+
+message ApiError {
+    ErrorTypes type = 1;
+    string message = 2;
+}

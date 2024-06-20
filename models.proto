@@ -5,7 +5,13 @@ package models;
 message Country {
     string id = 1;
     string name = 2;
-    string flag_url = 3;
+    optional string flag_url = 3;
+}
+
+message Currency {
+    int32 numeric_id = 1;
+    string symbol = 2;
+    string name = 3;
 }
 
 message ProductValueRange {
@@ -16,14 +22,14 @@ message ProductValueRange {
 message Product {
     string id = 1;
     string name = 2;
-    string country = 3;
-    string currency = 4;
+    string country_id = 3;
+    Currency currency = 4;
     repeated double denominations = 5;
     ProductValueRange value_range = 6;
     string image = 7;
-    string description = 8;
-    string terms_and_conditions = 9;
-    string instructions = 10;
+    optional string description = 8;
+    optional string terms_and_conditions = 9;
+    optional string instructions = 10;
 }
 
 message InviteCode {
