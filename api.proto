@@ -7,55 +7,41 @@ package api;
 // desc: Auth service
 service WalletAuthService {
     /**
-        path: /api/v1/auth/login/start
+        path: /api/v1/auth/start
         description: Start logic process
         method: POST
         version: v1
         auth: false
     */
-    rpc LoginStart(LoginStartRequest) returns (LoginStartResponse) {}
+    rpc AuthStart(LoginStartRequest) returns (LoginStartResponse) {}
 
     /**
-        path: /api/v1/auth/login/finish
-        description: Finish login process
+        path: /api/v1/auth/confirm
+        description: Confirm login process
         method: POST
         version: v1
         auth: false
     */
-    rpc LoginFinish(LoginFinishRequest) returns (LoginFinishResponse) {}
-
-    /**
-        path: /api/v1/auth/logout
-        description: Logout
-        method: POST
-        version: v1
-        auth: true
-    */
-    rpc Logout(LogoutRequest) returns (LogoutResponse) {}
+    rpc AuthConfirm(LoginFinishRequest) returns (LoginFinishResponse) {}
 }
 
-message LoginStartRequest {
+message AuthStartRequest {
     string address = 1;
 }
 
-message LoginStartResponse {
+message AuthStartResponse {
     string message_for_sign = 1;
 }
 
-message LoginFinishRequest {
+message AuthConfirmRequest {
     string address = 1;
     string signature = 2;
 }
 
-message LoginFinishResponse {
+message AuthConfirmResponse {
     string token = 1;
     string key = 2;
     string nonce = 3;
-}
-
-message LogoutRequest {}
-message LogoutResponse {
-    bool success = 1;
 }
 
 // desc: Country service
@@ -117,7 +103,7 @@ message PurchaseProductRequest {
 
 message PurchaseProductResponse {
     string wallet = 1;
-    string amount = 2;
+    double amount = 2;
     string memo = 3;
     string purchase_id = 4;
 }
