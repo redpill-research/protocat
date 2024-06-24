@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-import "models.proto";
+import "proto/models.proto";
 
 package api;
 
