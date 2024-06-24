@@ -9,9 +9,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - uses: bufbuild/buf-setup-action@v1.31.0
+      - uses: bufbuild/buf-setup-action@v1.34.0
 
       - name: Verify Buf installation
         run: buf --version
