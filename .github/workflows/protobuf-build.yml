@@ -21,3 +21,6 @@ jobs:
 
       - name: Build Protobuf with Buf
         run: buf build
+
+      - name: Generate clients code with Buf
+        run: buf generate

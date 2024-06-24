@@ -1,4 +1,6 @@
 version: v2
+modules:
+  - path: proto/atlas/v1
 lint:
   use:
     - DEFAULT

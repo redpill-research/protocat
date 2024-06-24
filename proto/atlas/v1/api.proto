@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-import "proto/models.proto";
+package atlas.api.v1;
 
-package api;
+import "models.proto";
 
 // desc: Auth service
 service WalletAuthService {
@@ -106,7 +106,7 @@ message GetProductsByCountryRequest {
 }
 
 message GetProductsByCountryResponse {
-    repeated models.Product products = 1;
+    repeated atlas.models.v1.Product products = 1;
 }
 
 message PurchaseProductRequest {
@@ -156,7 +156,7 @@ message GetReferralInfoRequest {}
 
 message GetReferralInfoResponse {
     int32 avalible_count = 1;
-    repeated models.InviteCode generated_codes = 2;
+    repeated atlas.models.v1.InviteCode generated_codes = 2;
     repeated string invited_addresses = 3;
 }
 
