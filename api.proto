@@ -59,6 +59,7 @@ message GetCountriesRequest {}
 
 message GetCountriesResponse {
     repeated models.Country countries = 1;
+    models.Country preferred_country = 2;
 }
 
 // desc: Products service
