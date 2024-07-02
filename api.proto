@@ -30,18 +30,17 @@ message AuthStartRequest {
 }
 
 message AuthStartResponse {
-    string message_for_sign = 1;
+    string auth_id = 1;
+    string message_for_sign = 2;
 }
 
 message AuthConfirmRequest {
-    string address = 1;
+    string auth_id = 1;
     string signature = 2;
 }
 
 message AuthConfirmResponse {
-    string token = 1;
-    string key = 2;
-    string nonce = 3;
+    string session_token = 1;
 }
 
 // desc: Country service
