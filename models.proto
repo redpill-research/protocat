@@ -36,3 +36,37 @@ message InviteCode {
     string code = 1;
     bool is_used = 2;
 }
+
+enum OrderStatus {
+    ORDER_STATUS_UNSPECIFIED = 0;
+    ORDER_STATUS_CREATED = 1; // order was created and waites for payment
+    ORDER_STATUS_COMPLETED = 2;
+    ORDER_STATUS_CANCELLED = 3; // order was cancelled by user or by timeout
+}
+
+message CardData {
+    string url = 1;
+    string code = 2;
+    string expiry_date_iso = 3; // "2024-06-29T19:48:24.334Z"
+    double face_value = 4;
+}
+
+message Coin {
+    double amount = 1;
+    string denom = 2;
+}
+
+message Order {
+    string id = 1;
+
+    Coin amount = 2;
+    OrderStatus status = 3;
+    
+    string tx_url = 4;
+    string tx_hash = 5;
+
+    Product product = 6;
+    CardData card_data = 7;
+
+    int64 created_at = 8;
+}

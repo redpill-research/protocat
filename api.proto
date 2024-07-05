@@ -74,13 +74,13 @@ service ProductsService {
     rpc GetProductsByCountry(GetProductsByCountryRequest) returns (GetProductsByCountryResponse) {}
 
     /**
-        path: /api/v1/purchase
-        description: Purchase product
-        method: POST
-        version: v1
-        auth: true
+        @path: /api/v1/products/by_id
+        @description: Get product by id
+        @method: POST
+        @version: v1
+        @auth: false
     */
-    rpc PurchaseProduct(PurchaseProductRequest) returns (PurchaseProductResponse) {}
+    rpc GetProductById(GetProductByIdRequest) returns (GetProductByIdResponse) {}
 }
 
 message GetProductsByCountryRequest {
@@ -95,17 +95,66 @@ message GetProductsByCountryResponse {
     repeated models.Product products = 1;
 }
 
-message PurchaseProductRequest {
+message GetProductByIdRequest {
     string product_id = 1;
-    string country_id = 2;
-    double product_denomination = 3;
 }
 
-message PurchaseProductResponse {
+message GetProductByIdResponse {
+    models.Product product = 1;
+}
+
+service OrdersService {
+    /**
+        path: /api/v1/orders/create
+        description: Create order
+        method: POST
+        version: v1
+        auth: true
+    */
+    rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse) {}
+
+    /**
+        path: /api/v1/orders/by_id
+        description: Create order
+        method: POST
+        version: v1
+        auth: true
+    */
+    rpc GetOrderById(GetOrderByIdRequest) returns (GetOrderByIdResponse) {}
+
+    /**
+        path: /api/v1/orders/all
+        description: Create order
+        method: POST
+        version: v1
+        auth: true
+    */
+    rpc GetAllOrders(GetAllOrdersRequest) returns (GetAllOrdersResponse) {}
+}
+
+message CreateOrderRequest {
+    string product_id = 1;
+    double product_denomination = 2;
+}
+
+message CreateOrderResponse {
     string wallet = 1;
-    double amount = 2;
-    string memo = 3;
-    string purchase_id = 4;
+    double amount = 2; // islm amount chain_id: 11235
+    models.Order order = 3;
+}
+
+message GetOrderByIdRequest {
+    string order_id = 1;
+}
+
+message GetOrderByIdResponse {
+    models.Order order = 1;
+}
+
+message GetAllOrdersRequest {}
+
+message GetAllOrdersResponse {
+    repeated models.Order orders = 1;
 }
 
 // desc: Referral system service
