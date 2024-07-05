@@ -101,6 +101,7 @@ message GetProductByIdRequest {
 
 message GetProductByIdResponse {
     models.Product product = 1;
+    models.Country product_country = 2;
 }
 
 service OrdersService {
