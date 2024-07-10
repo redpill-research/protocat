@@ -56,17 +56,22 @@ message Coin {
     string denom = 2;
 }
 
+message PaymentData {
+    string wallet = 1;
+    Coin amount = 2;
+
+    string tx_url = 3;
+    string tx_hash = 4;
+}
+
 message Order {
     string id = 1;
 
-    Coin amount = 2;
+    PaymentData payment_data = 2;
     OrderStatus status = 3;
-    
-    string tx_url = 4;
-    string tx_hash = 5;
 
-    Product product = 6;
-    CardData card_data = 7;
+    Product product = 4;
+    CardData card_data = 5;
 
-    int64 created_at = 8;
+    int64 created_at = 6;
 }
