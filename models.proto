@@ -41,7 +41,8 @@ enum OrderStatus {
     ORDER_STATUS_UNSPECIFIED = 0;
     ORDER_STATUS_CREATED = 1; // order was created and waites for payment
     ORDER_STATUS_COMPLETED = 2;
-    ORDER_STATUS_CANCELLED = 3; // order was cancelled by user or by timeout
+    ORDER_STATUS_CANCELLED = 3; // order was cancelled by user
+    ORDER_STATUS_EXPIRED = 4; // order was expired
 }
 
 message CardData {
@@ -60,8 +61,10 @@ message PaymentData {
     string wallet = 1;
     Coin amount = 2;
 
-    string tx_url = 3;
-    string tx_hash = 4;
+    int64 expired_after_seconds = 3;
+
+    string tx_url = 4;
+    string tx_hash = 5;
 }
 
 message Order {
