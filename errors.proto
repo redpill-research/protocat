@@ -9,6 +9,7 @@ enum ErrorTypes {
     UNAUTHENTICATED = 3;
     UNIMPLEMENTED = 4;
     INTERNAL = 5;
+    DONT_HAVE_INVITE = 6;
 }
 
 message ApiError {

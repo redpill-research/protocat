@@ -63,8 +63,8 @@ message PaymentData {
 
     int64 expired_after_seconds = 3;
 
-    string tx_url = 4;
-    string tx_hash = 5;
+    optional string tx_url = 4;
+    optional string tx_hash = 5;
 }
 
 message Order {

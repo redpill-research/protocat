@@ -27,6 +27,7 @@ service WalletAuthService {
 
 message AuthStartRequest {
     string address = 1;
+    optional string ref_code = 2;
 }
 
 message AuthStartResponse {
@@ -139,9 +140,7 @@ message CreateOrderRequest {
 }
 
 message CreateOrderResponse {
-    string wallet = 1;
-    double amount = 2; // islm amount chain_id: 11235
-    models.Order order = 3;
+    models.Order order = 1;
 }
 
 message GetOrderByIdRequest {
