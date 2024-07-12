@@ -75,7 +75,9 @@ message Order {
     OrderStatus status = 3;
 
     Product product = 4;
-    CardData card_data = 5;
+    double product_face_amount = 5;
 
-    int64 created_at = 6;
+    CardData card_data = 10;
+
+    int64 created_at = 100;
 }
