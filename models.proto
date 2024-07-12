@@ -39,10 +39,11 @@ message InviteCode {
 
 enum OrderStatus {
     ORDER_STATUS_UNSPECIFIED = 0;
-    ORDER_STATUS_CREATED = 1; // order was created and waites for payment
-    ORDER_STATUS_COMPLETED = 2;
-    ORDER_STATUS_CANCELLED = 3; // order was cancelled by user
-    ORDER_STATUS_EXPIRED = 4; // order was expired
+    ORDER_STATUS_CREATED = 1; // order was created
+    ORDER_STATUS_PENDING = 2; // order is pending and waits for payment
+    ORDER_STATUS_COMPLETED = 3;
+    ORDER_STATUS_CANCELLED = 4; // order was cancelled by user
+    ORDER_STATUS_EXPIRED = 5; // order was expired
 }
 
 message CardData {
