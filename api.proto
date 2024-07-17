@@ -201,6 +201,7 @@ message SendInviteRequest {
 
 message SendInviteResponse {
     string tx = 1;
+    string url = 2;
 }
 
 message GenerateInviteCodeRequest {}
