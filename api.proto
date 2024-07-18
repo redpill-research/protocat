@@ -90,10 +90,13 @@ message GetProductsByCountryRequest {
         @required: true
     */
     string country_id = 1;
+    int32 page = 2;
+    int32 limit = 3;
 }
 
 message GetProductsByCountryResponse {
     repeated models.Product products = 1;
+    int32 total = 2;
 }
 
 message GetProductByIdRequest {
@@ -151,10 +154,14 @@ message GetOrderByIdResponse {
     models.Order order = 1;
 }
 
-message GetAllOrdersRequest {}
+message GetAllOrdersRequest {
+    int32 page = 1;
+    int32 limit = 2;
+}
 
 message GetAllOrdersResponse {
     repeated models.Order orders = 1;
+    int32 total = 2;
 }
 
 // desc: Referral system service
