@@ -51,7 +51,7 @@ service CountryService {
         description: Get countries list
         method: POST
         version: v1
-        auth: false
+        auth: true
     */
     rpc GetCountries(GetCountriesRequest) returns (GetCountriesResponse) {}
 }
@@ -70,7 +70,7 @@ service ProductsService {
         @description: Get products list by country
         @method: POST
         @version: v1
-        @auth: false
+        @auth: true
     */
     rpc GetProductsByCountry(GetProductsByCountryRequest) returns (GetProductsByCountryResponse) {}
 
@@ -79,9 +79,18 @@ service ProductsService {
         @description: Get product by id
         @method: POST
         @version: v1
-        @auth: false
+        @auth: true
     */
     rpc GetProductById(GetProductByIdRequest) returns (GetProductByIdResponse) {}
+
+        /**
+        @path: /api/v1/products/search
+        @description: Search products by name and country
+        @method: POST
+        @version: v1
+        @auth: true
+    */
+    rpc SearchProducts(SearchProductsRequest) returns (SearchProductsResponse) {}
 }
 
 message GetProductsByCountryRequest {
@@ -106,6 +115,27 @@ message GetProductByIdRequest {
 message GetProductByIdResponse {
     models.Product product = 1;
     models.Country product_country = 2;
+}
+
+message SearchProductsRequest {
+    /**
+        @description: country of products
+        @required: true
+    */
+    string country_id = 1;
+    /**
+        @description: name of products
+        @required: true
+    */
+    string name = 2;
+
+    optional int32 page = 3;
+    optional int32 limit = 4;
+}
+
+message SearchProductsResponse {
+    repeated models.Product products = 1;
+    int32 total = 2;
 }
 
 service OrdersService {
