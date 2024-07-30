@@ -83,7 +83,7 @@ service ProductsService {
     */
     rpc GetProductById(GetProductByIdRequest) returns (GetProductByIdResponse) {}
 
-        /**
+    /**
         @path: /api/v1/products/search
         @description: Search products by name and country
         @method: POST
