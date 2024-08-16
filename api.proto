@@ -38,10 +38,43 @@ message AuthStartResponse {
 message AuthConfirmRequest {
     string auth_id = 1;
     string signature = 2;
+    optional string posthog_distinct_id = 3;
 }
 
 message AuthConfirmResponse {
     string session_token = 1;
+}
+
+service AnalyticsService {
+    /** 
+        path: /api/v1/analytics/set_posthog_id
+        description: Set posthog distinct id
+        method: POST
+        version: v1
+        auth: true
+    */
+    rpc SetPosthogId(SetPosthogIdRequest) returns (SetPosthogIdResponse) {}
+
+    /**
+        path: /api/v1/analytics/get_posthog_id
+        description: Get posthog distinct id for check session has already setted posthog id
+        method: POST
+        version: v1
+        auth: true
+    */
+    rpc GetPosthogId(GetPosthogIdRequest) returns (GetPosthogIdResponse) {}
+}
+
+message SetPosthogIdRequest {
+    string distinct_id = 1;
+}
+
+message SetPosthogIdResponse {}
+
+message GetPosthogIdRequest {}
+
+message GetPosthogIdResponse {
+    string distinct_id = 1;
 }
 
 // desc: Country service
